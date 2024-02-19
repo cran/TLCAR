@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="BOGNINOU Mahoulé Jude" />
+
+<meta name="date" content="2024-02-17" />
+
+<title>Computation of Topp-Leone Cauchy Rayleigh (TLCAR) distribution’s properties</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Computation of Topp-Leone Cauchy Rayleigh
+(TLCAR) distribution’s properties</h1>
+<h4 class="author">BOGNINOU Mahoulé Jude</h4>
+<h4 class="date">2024-02-17</h4>
+
+
+
+<div id="introduction-to-tlcar" class="section level1">
+<h1>Introduction to TLCAR</h1>
+<p>This vignette provides an overview of the “TLCAR” Package. The
+package TLCAR offers a powerful range of statistical tools for
+analysis,simulation, and computation based on the Topp-Leone Cauchy
+Rayleigh distribution (TLCAR). This distribution, which combines the
+properties of the Topp-Leone, Cauchy, and Rayleigh distributions,is
+particularly useful for modeling complex, heterogeneous data present in
+many scientific disciplines. With the “TLCAR” package, users can
+estimate the parameters of the TLCAR distribution from datasets,
+generate random samples according to this distribution, plot histograms
+and density functions, and calculate specific quantiles.</p>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p>You can install the “TLCAR” package from CRAN using the following
+command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;TLCAR&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="load-the-packages" class="section level1">
+<h1>Load the packages</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(stats)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">library</span>(TLCAR)</span></code></pre></div>
+<div id="overview-of-tlcar-distribution" class="section level2">
+<h2>Overview of TLCAR Distribution</h2>
+<p>The TLCAR distribution is particularly useful for modeling data with
+heavy tails, skewness, and positive values. It is a versatile
+distribution that can handle diverse characteristics in the data.</p>
+</div>
+<div id="probability-density-function-pdf-for-tlcar-distribution" class="section level2">
+<h2>Probability Density Function (PDF) for TLCAR distribution</h2>
+<p>The probability density function (PDF) for the TLCAR distribution is
+given by the formula:</p>
+<p><span class="math display">\[ f(x;\nu)=\frac{2\alpha}{\pi a} \times
+\left[\frac{1+\left(\frac{x^2}{\theta^2}-1\right)e^{-\frac{x^2}{2\theta^2}}+m}{1+\left(\frac{x\left(1-e^{-\frac{x^2}{2\theta^2}}+m\right)
+-b}{a}\right)^2}\right]
+            \times\left[\frac{1}{2}-\frac{1}{\pi}\arctan\frac{x\left(1-e^{-\frac{x^2}{2\theta^2}}+m\right)
+-b}{a}\right]    \times \left[
+1-\left(\frac{1}{2}-\frac{1}{\pi}\arctan\frac{x\left(1-e^{-\frac{x^2}{2\theta^2}}+m\right)-b}{a}\right)^2\right]^{\alpha-1}\]</span>
+where <span class="math inline">\(\alpha\)</span> , <span class="math inline">\(a\)</span> , <span class="math inline">\(\theta\)</span> , <span class="math inline">\(m\)</span> &gt; 0 .</p>
+</div>
+<div id="example-1" class="section level2">
+<h2>Example 1</h2>
+<p>Let’s calculate the PDF for <span class="math inline">\(x=1\)</span>
+, <span class="math inline">\(\alpha=1\)</span> , <span class="math inline">\(a=1\)</span> , <span class="math inline">\(b=0\)</span> , <span class="math inline">\(\theta=2\)</span> and <span class="math inline">\(m=1\)</span></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">dTLCAR</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">theta =</span> <span class="dv">2</span>, <span class="at">m=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.08801882</code></pre>
+</div>
+<div id="example-2" class="section level2">
+<h2>Example 2</h2>
+<p>Let’s calculate the PDF for <span class="math inline">\(x=3\)</span>
+, <span class="math inline">\(\alpha=2\)</span> , <span class="math inline">\(a=1\)</span> , <span class="math inline">\(b=2\)</span> , <span class="math inline">\(\theta=2\)</span> and <span class="math inline">\(m=4\)</span></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">dTLCAR</span>(<span class="at">x =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="dv">2</span>, <span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span>, <span class="at">theta =</span> <span class="dv">2</span>, <span class="at">m=</span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0.001247268</code></pre>
+</div>
+<div id="cumulative-distribution-function-cdf-for-tlcar-distribution" class="section level2">
+<h2>Cumulative Distribution Function (CDF) for TLCAR distribution</h2>
+<p>The cumulative distribution function (CDF) for the TLCAR distribution
+is given by the formula:</p>
+<p><span class="math display">\[F(x;\nu)=\left[
+1-\left(\frac{1}{2}-\frac{1}{\pi}\arctan\frac{x\left(1-e^{-\frac{x^2}{2\theta^2}}+m\right)
+-b}{a}\right)^2\right]^\alpha \]</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> , <span class="math inline">\(a\)</span> , <span class="math inline">\(\theta\)</span> , <span class="math inline">\(m\)</span> &gt; 0 .</p>
+</div>
+<div id="example-1-1" class="section level2">
+<h2>Example 1</h2>
+<p>Let’s calculate the CDF for <span class="math inline">\(x=1\)</span>
+, <span class="math inline">\(\alpha=1\)</span> , <span class="math inline">\(a=1\)</span> , <span class="math inline">\(b=0\)</span> , <span class="math inline">\(\theta=2\)</span> and <span class="math inline">\(m=1\)</span></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">cTLCAR</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">theta =</span> <span class="dv">2</span>,<span class="at">m=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9460113</code></pre>
+</div>
+<div id="example-2-1" class="section level2">
+<h2>Example 2</h2>
+<p>Let’s calculate the CDF for <span class="math inline">\(x=3\)</span>
+, <span class="math inline">\(\alpha=2\)</span> , <span class="math inline">\(a=1\)</span> , <span class="math inline">\(b=2\)</span> , <span class="math inline">\(\theta=2\)</span> and <span class="math inline">\(m=4\)</span></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">cTLCAR</span>(<span class="at">x =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="dv">2</span>, <span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span>, <span class="at">theta =</span> <span class="dv">2</span>,<span class="at">m=</span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9986058</code></pre>
+</div>
+<div id="graphical-plot-of-the-tlcar-distribution" class="section level2">
+<h2>Graphical Plot of the TLCAR Distribution</h2>
+<p>This function generates a graphical plot of the probability density
+function (PDF) or cumulative distribution function (CDF) for the TLCAR
+distribution.</p>
+</div>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<p>Let’s plot the PDF for a range of values with parameters <span class="math inline">\(\alpha=1\)</span> , <span class="math inline">\(a=1\)</span> , <span class="math inline">\(b=0\)</span> , <span class="math inline">\(\theta=2\)</span> and <span class="math inline">\(m=1\)</span></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">ploTLCAR</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">1</span>,<span class="at">b=</span><span class="dv">0</span>, <span class="at">theta =</span> <span class="dv">2</span>,<span class="at">m=</span><span class="dv">1</span>, <span class="at">type =</span> <span class="st">&quot;pdf&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Let’s plot the CDF for a range of values with parameters <span class="math inline">\(\alpha=1\)</span> , <span class="math inline">\(a=1\)</span> , <span class="math inline">\(b=0\)</span> , <span class="math inline">\(\theta=2\)</span> and <span class="math inline">\(m=1\)</span></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">ploTLCAR</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">1</span>,<span class="at">b=</span><span class="dv">0</span>, <span class="at">theta =</span> <span class="dv">2</span>, <span class="at">m=</span><span class="dv">1</span>,<span class="at">type =</span> <span class="st">&quot;cdf&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="quantile-function-for-tlcar-distribution" class="section level2">
+<h2>Quantile function for TLCAR distribution</h2>
+<p>The quantile function calculates the quantile value for a given
+probability using the TLCAR distribution.</p>
+</div>
+<div id="example-1-2" class="section level2">
+<h2>Example 1</h2>
+<p>Let’s calculate the 0.5 quantile (median) using parameters <span class="math inline">\(\alpha=1\)</span> , <span class="math inline">\(a=1\)</span> , <span class="math inline">\(b=0\)</span> ,<span class="math inline">\(\theta=2\)</span> and <span class="math inline">\(m=1\)</span></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">qTLCAR</span>(<span class="at">p =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">1</span>, <span class="at">b=</span> <span class="dv">0</span>, <span class="at">theta =</span> <span class="dv">2</span>,<span class="at">m=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] -0.7166792</code></pre>
+</div>
+<div id="example-2-2" class="section level2">
+<h2>Example 2</h2>
+<p>Let’s calculate the 0.75 quantile using parameters <span class="math inline">\(\alpha=2\)</span> , <span class="math inline">\(a=2\)</span> , <span class="math inline">\(b=1\)</span> ,<span class="math inline">\(\theta=2\)</span> and <span class="math inline">\(m=2\)</span></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">qTLCAR</span>(<span class="at">p =</span> <span class="fl">0.75</span>, <span class="at">alpha =</span> <span class="dv">2</span>, <span class="at">a =</span> <span class="dv">2</span>, <span class="at">b=</span> <span class="dv">1</span>, <span class="at">theta =</span> <span class="dv">2</span>,<span class="at">m=</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9037692</code></pre>
+</div>
+<div id="generate-random-samples-from-the-tlcar-distribution" class="section level2">
+<h2>Generate random samples from the TLCAR distribution</h2>
+<p>This function generates random samples from the TLCAR distribution
+using the Box-Muller algorithm.</p>
+</div>
+<div id="example-1-3" class="section level2">
+<h2>Example 1</h2>
+<p>Let’s generate 25 random samples with parameters <span class="math inline">\(\alpha=1\)</span> , <span class="math inline">\(a=1\)</span> , <span class="math inline">\(b=0\)</span> ,<span class="math inline">\(\theta=2\)</span> and <span class="math inline">\(m=1\)</span></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">rTLCAR</span>(<span class="at">n =</span> <span class="dv">25</span>, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">theta =</span> <span class="dv">2</span>,<span class="at">m=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>##  [1]  -0.7025289  -1.0591749   1.9324451  -0.3384789   2.0136376   0.8894991
+##  [7]  -4.6530735  -0.6864125  -0.5854632   0.0678766  -0.7867331 -45.4280152
+## [13]  -1.6517409  -3.9558302   0.4378498 -16.5788655  -1.2367879  -2.1140315
+## [19]   1.7325325  -3.9671058  -2.8861827  -1.5670429  -3.3882363 -10.3419322
+## [25]   1.4776296</code></pre>
+</div>
+<div id="example-2-3" class="section level2">
+<h2>Example 2</h2>
+<p>Let’s generate 50 random samples with parameters <span class="math inline">\(\alpha=2\)</span> , <span class="math inline">\(a=2\)</span> , <span class="math inline">\(b=1\)</span> ,<span class="math inline">\(\theta=2\)</span> and <span class="math inline">\(m=2\)</span></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">rTLCAR</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">alpha =</span> <span class="dv">2</span>, <span class="at">a =</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">1</span>, <span class="at">theta =</span> <span class="dv">2</span>,<span class="at">m=</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##  [1] -0.3367058  1.7285812  1.1875268  0.4120580  1.0581625  0.3990519
+##  [7]  1.0071567  2.1849633  2.3598769  0.2319956 -0.5748939  1.0236759
+## [13]  0.1246406  0.5529991 -1.2433635  0.3173053 -1.3641320 -0.7273208
+## [19]  1.9033033  1.5304993  1.0602287 -0.6917317  0.6620348  1.3377633
+## [25]  0.3161296  0.3535551  0.1526248  0.3199435  1.1434471 -1.5357639
+## [31]  0.7347157  0.5214707  0.1937358  0.8818820 -0.8341408  0.8520853
+## [37]  0.2262596  0.1394313  0.5857642  0.6400057 -1.3768247 -1.0428210
+## [43]  0.8939435  0.5473589 -1.7624686 -0.6047640 -0.4882200  0.2529339
+## [49] -2.8642775 -0.4241723</code></pre>
+</div>
+<div id="estimate-parameters-with-constraints" class="section level2">
+<h2>Estimate parameters with constraints</h2>
+<p>This function estimates the parameters of the TLCAR distribution
+while respecting constraints on the parameters.</p>
+</div>
+<div id="example-1-4" class="section level2">
+<h2>Example 1</h2>
+<p>Let’s estimate parameters from a sample data vector.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">data</span>(ConductorFailureTimes)</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a> <span class="fu">fTLCAR</span>(ConductorFailureTimes)</span></code></pre></div>
+<pre><code>## [1]  3.017587  3.495700 13.258842  1.696800  1.000000</code></pre>
+</div>
+<div id="example-2-4" class="section level2">
+<h2>Example 2</h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="fu">data</span>(Tree_diameters)</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="fu">fTLCAR</span>(Tree_diameters)</span></code></pre></div>
+<pre><code>## [1]  3.447945  6.540533 26.392380  1.000000  1.000000</code></pre>
+</div>
+<div id="estimate-parameters-with-constraints-and-plot-histogram-with-estimated-density" class="section level2">
+<h2>Estimate parameters with constraints and plot histogram with
+estimated density</h2>
+<p>This function estimates parameters and plots the histogram of the
+data along with the estimated density curve.</p>
+</div>
+<div id="example-1-5" class="section level2">
+<h2>Example 1</h2>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="fu">sTLCAR</span>(ConductorFailureTimes)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="example-2-5" class="section level2">
+<h2>Example 2</h2>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="fu">sTLCAR</span>(Tree_diameters)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>This concludes the overview of the “TLCAR” package and its
+functionalities for working with the Topp-Leone Cauchy Rayleigh
+distribution.</p>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>Atchadé, M.N., Bogninou, M.J., Djibril, A.M. et al. Topp-Leone Cauchy
+Family of Distributions with Applications in Industrial Engineering. J
+Stat Theory Appl 22, 339–365 (2023). <a href="https://doi.org/10.1007/s44199-023-00066-4" class="uri">https://doi.org/10.1007/s44199-023-00066-4</a></p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

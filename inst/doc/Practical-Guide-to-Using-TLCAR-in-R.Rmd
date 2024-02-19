@@ -1,0 +1,190 @@
+---
+title: "Computation of Topp-Leone Cauchy Rayleigh (TLCAR) distribution's properties"
+author: " BOGNINOU Mahoulé Jude"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Computation of Topp-Leone Cauchy Rayleigh (TLCAR) distribution's properties}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+# Introduction to TLCAR 
+This vignette provides an overview of the "TLCAR" Package. The package TLCAR offers a powerful range of statistical tools for analysis,simulation, and computation based on the Topp-Leone Cauchy Rayleigh distribution (TLCAR).
+ This distribution, which combines the properties of the Topp-Leone, Cauchy, and Rayleigh distributions,is particularly useful for modeling complex, heterogeneous data present in many scientific disciplines. With the "TLCAR" package, users can estimate the parameters of the TLCAR distribution from datasets, generate random samples according to this distribution, plot histograms and density functions, and calculate specific quantiles.
+ 
+## Installation
+
+You can install the "TLCAR" package from CRAN using the following command:
+
+```R
+install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("TLCAR")
+```
+# Load the packages
+
+```{r}
+library(stats)
+library(dplyr)
+library(ggplot2)
+library(TLCAR)
+```
+
+
+## Overview of TLCAR Distribution
+
+The TLCAR distribution is particularly useful for modeling data with heavy tails, skewness, and positive values. It is a versatile distribution that can handle diverse characteristics in the data.
+
+## Probability Density Function (PDF) for TLCAR distribution
+
+The probability density function (PDF) for the TLCAR distribution is given by the formula:
+
+$$ f(x;\nu)=\frac{2\alpha}{\pi a} \times \left[\frac{1+\left(\frac{x^2}{\theta^2}-1\right)e^{-\frac{x^2}{2\theta^2}}+m}{1+\left(\frac{x\left(1-e^{-\frac{x^2}{2\theta^2}}+m\right) -b}{a}\right)^2}\right] 
+			\times\left[\frac{1}{2}-\frac{1}{\pi}\arctan\frac{x\left(1-e^{-\frac{x^2}{2\theta^2}}+m\right) -b}{a}\right] 	\times \left[ 1-\left(\frac{1}{2}-\frac{1}{\pi}\arctan\frac{x\left(1-e^{-\frac{x^2}{2\theta^2}}+m\right)-b}{a}\right)^2\right]^{\alpha-1}$$
+where  $\alpha$ , $a$ , $\theta$ , $m$  > 0 .
+
+## Example 1 
+
+Let's calculate the PDF for $x=1$ , $\alpha=1$ , $a=1$ , $b=0$ , $\theta=2$ and $m=1$
+
+
+
+```{r}
+dTLCAR(x = 1, alpha = 1, a = 1, b = 0, theta = 2, m=1)
+```
+## Example 2 
+
+Let's calculate the PDF for $x=3$ , $\alpha=2$ , $a=1$ , $b=2$ , $\theta=2$ and $m=4$
+
+
+
+```{r}
+dTLCAR(x = 3, alpha = 2, a = 1, b = 2, theta = 2, m=4)
+```
+
+## Cumulative Distribution Function (CDF) for TLCAR distribution
+
+The cumulative distribution function (CDF) for the TLCAR distribution is given by the formula:
+
+$$F(x;\nu)=\left[ 1-\left(\frac{1}{2}-\frac{1}{\pi}\arctan\frac{x\left(1-e^{-\frac{x^2}{2\theta^2}}+m\right) -b}{a}\right)^2\right]^\alpha $$
+
+where $\alpha$ , $a$ , $\theta$  , $m$  > 0 .
+
+
+## Example 1
+
+Let's calculate the CDF for $x=1$ , $\alpha=1$ , $a=1$ , $b=0$ , $\theta=2$ and $m=1$
+
+```{r}
+cTLCAR(x = 1, alpha = 1, a = 1, b = 0, theta = 2,m=1)
+
+```
+
+
+## Example 2
+
+Let's calculate the CDF for $x=3$ , $\alpha=2$ , $a=1$ , $b=2$ , $\theta=2$ and $m=4$
+
+```{r}
+cTLCAR(x = 3, alpha = 2, a = 1, b = 2, theta = 2,m=4)
+
+```
+## Graphical Plot of the TLCAR Distribution
+
+This function generates a graphical plot of the probability density function (PDF) or cumulative distribution function (CDF) for the TLCAR distribution.
+
+## Example
+Let's plot the PDF for a range of values with parameters $\alpha=1$ , $a=1$ , $b=0$ , $\theta=2$ and $m=1$
+```{r}
+ploTLCAR(x = seq(-4, 10, by = 0.1), alpha = 1, a = 1,b=0, theta = 2,m=1, type = "pdf")
+
+```
+
+
+Let's plot the CDF for a range of values with parameters $\alpha=1$ , $a=1$ , $b=0$ , $\theta=2$ and $m=1$ 
+```{r}
+ploTLCAR(x = seq(-4, 10, by = 0.1), alpha = 1, a = 1,b=0, theta = 2, m=1,type = "cdf")
+```
+
+
+##  Quantile function for TLCAR distribution
+
+The quantile function calculates the quantile value for a given probability using the TLCAR distribution.
+
+## Example 1 
+Let's calculate the 0.5 quantile (median) using parameters $\alpha=1$ , $a=1$ , $b=0$ ,$\theta=2$ and $m=1$
+```{r}
+qTLCAR(p = 0.5, alpha = 1, a = 1, b= 0, theta = 2,m=1)
+
+```
+
+## Example 2
+Let's calculate the 0.75 quantile  using parameters $\alpha=2$ , $a=2$ , $b=1$ ,$\theta=2$ and $m=2$
+```{r}
+qTLCAR(p = 0.75, alpha = 2, a = 2, b= 1, theta = 2,m=2)
+
+```
+## Generate random samples from the TLCAR distribution
+
+This function generates random samples from the TLCAR distribution using the Box-Muller algorithm.
+
+## Example 1
+Let's generate 25 random samples with parameters $\alpha=1$ , $a=1$ , $b=0$ ,$\theta=2$ and $m=1$
+```{r}
+rTLCAR(n = 25, alpha = 1, a = 2, b = 0, theta = 2,m=1)
+```
+
+
+## Example 2
+Let's generate 50 random samples with parameters $\alpha=2$ , $a=2$ , $b=1$ ,$\theta=2$ and $m=2$
+```{r}
+rTLCAR(n = 50, alpha = 2, a = 2, b = 1, theta = 2,m=2)
+```
+
+## Estimate parameters with constraints
+This function estimates the parameters of the TLCAR distribution while respecting constraints on the parameters.
+
+## Example 1  
+Let's estimate parameters from a sample data vector.
+
+```{r}
+data(ConductorFailureTimes)
+ fTLCAR(ConductorFailureTimes)
+```
+## Example 2
+```{r}
+data(Tree_diameters)
+fTLCAR(Tree_diameters)
+```
+
+
+## Estimate parameters with constraints and plot histogram with estimated density
+This function estimates parameters and plots the histogram of the data along with the estimated density curve.
+
+## Example 1 
+```{r}
+sTLCAR(ConductorFailureTimes)
+```
+
+## Example 2
+
+```{r}
+sTLCAR(Tree_diameters)
+```
+
+
+This concludes the overview of the "TLCAR" package and its functionalities for working with the Topp-Leone Cauchy Rayleigh distribution.
+
+
+
+## References
+
+Atchadé, M.N., Bogninou, M.J., Djibril, A.M. et al. Topp-Leone Cauchy Family of Distributions with Applications in Industrial Engineering. J Stat Theory Appl 22, 339–365 (2023).
+https://doi.org/10.1007/s44199-023-00066-4
+
+
+
+
+

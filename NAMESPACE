@@ -1,0 +1,6 @@
+importFrom(dplyr, select, mutate)
+importFrom(ggplot2, ggplot)
+importFrom(stats, nlminb, optimize, runif)
+importFrom(graphics, plot, hist, curve)
+exportPattern("^[[:alpha:]]+")
+
