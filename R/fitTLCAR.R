@@ -13,6 +13,7 @@
 #' estimated_params <- fTLCAR(ConductorFailureTimes)
 #'
 #' @export
+#' 
 fTLCAR <- function(data) {
   log_likelihood <- function(parameters) {
     alpha <- parameters[1]

@@ -13,7 +13,9 @@
 #' data(ConductorFailureTimes)
 #' sTLCAR(ConductorFailureTimes)
 #'
+#'
 #' @export
+#' 
   sTLCAR <- function(data) {
 
   hist(data, main = "Data histogram with estimated density", xlab = "x", ylab = "Density", freq = FALSE, breaks = 15,col = "#87CEEB")
